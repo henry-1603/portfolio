@@ -13,8 +13,8 @@ function App() {
       <main className="min-h-screen">
         <Header/>
         <Hero />
-        <Experience />
         <TechStack />
+        <Experience />
         <Projects />
         <Contact />
         <Footer />

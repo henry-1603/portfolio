@@ -65,7 +65,7 @@ function Hero() {
         transition={{ duration: 0.8 }}
         className="container max-w-4xl mx-auto text-center"
       >
-        <div className="mb-8 relative mx-auto w-50 h-50 overflow-hidden rounded-full border-4 border-[#2f436e]">
+        <div className="mb-8 relative mx-auto w-50 h-50 overflow-hidden rounded-full border-2 border-[#2f436e]">
           <img
             src={profile}
             alt="Profile"

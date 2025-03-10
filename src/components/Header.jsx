@@ -17,7 +17,7 @@ function Header() {
     <div className="flex p-4 items-center justify-between bg-secondary border-b-2 border-[#2f436e]">
       {/* Logo Section */}
       <div className="flex gap-2 justify-center items-center">
-        <p className="text-[#2f436e] font-black text-xl">Henil Suhagiya</p>
+        <p className="text-[#2f436e] font-black text-xl">CodeCrafter</p>
       </div>
 
       {/* Navigation Links */}
