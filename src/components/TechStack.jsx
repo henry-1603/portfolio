@@ -82,7 +82,7 @@ function TechStack() {
   }
 
   return (
-    <section id="tech-stack" className="py-20">
+    <section id="techstack" className="py-20">
       <div className="container px-4 mx-auto max-w-4xl">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-5xl text-[#2f436e] font-bold mb-4">Tech Stack</h2>
