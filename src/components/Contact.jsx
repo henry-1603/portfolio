@@ -10,18 +10,42 @@ function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    setIsSubmitting(true)
-
-    // Simulate form submission
-    setTimeout(() => {
-      setIsSubmitting(false)
-      // Reset form
-      e.target.reset()
-      // Show success message (you could use a toast here)
-      alert("Message sent successfully!")
-    }, 1500)
-  }
+    e.preventDefault();
+    setIsSubmitting(true);
+  
+    const formData = {
+      name: e.target.name.value,
+      email: e.target.email.value,
+      subject: e.target.subject.value,
+      message: e.target.message.value,
+    };
+  
+    const webhookURL = "script.google.com/macros/s/AKfycbw9RPhzumVIbZ9AjCOo-BYEL_-DsCz_yYiAUPt_THatJ2kCUEo4smEJkPG_38GnvaH7/exec?gid=0";
+    const proxyURL = "https://";
+  
+    try {
+      const response = await fetch(proxyURL + webhookURL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+  
+      if (response.ok) {
+        alert("Message sent successfully!");
+        e.target.reset();
+      } else {
+        alert("Failed to send message. Please try again later.");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("An error occurred. Please try again later.");
+    }
+  
+    setIsSubmitting(false);
+  };
+  
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -75,11 +99,8 @@ function Contact() {
                 </div>
                 <div>
                   <h4 className="font-medium text-left text-black">Email</h4>
-                  <a
-                    href="mailto:henilsuhagiya0@gmail.com"
-                    className="text-muted-foreground hover:text-primary transition-colors "
-                  >
-                   <span className="text-gray-500">henilsuhagiya0@gmail.com</span>
+                  <a href="mailto:henilsuhagiya0@gmail.com" className="text-muted-foreground hover:text-primary transition-colors ">
+                    <span className="text-gray-500">henilsuhagiya0@gmail.com</span>
                   </a>
                 </div>
               </div>
@@ -91,7 +112,7 @@ function Contact() {
                 <div>
                   <h4 className="font-medium text-left text-black">Phone</h4>
                   <a href="tel:+917990232478" className="text-muted-foreground hover:text-primary transition-colors">
-                  <span className="text-gray-500">+91 7990232478 </span>
+                    <span className="text-gray-500">+91 7990232478 </span>
                   </a>
                 </div>
               </div>
@@ -111,7 +132,7 @@ function Contact() {
           <motion.div variants={itemVariants}>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid sm:grid-cols-2 gap-4">
-                <div className=" flex flex-col justify-start space-y-2">
+                <div className="flex flex-col justify-start space-y-2">
                   <label htmlFor="name" className="text-sm text-black font-bold text-start">
                     Name
                   </label>
@@ -127,13 +148,13 @@ function Contact() {
                     type="email"
                     placeholder="Your email"
                     required
-                    className="form-input h-10 border-gray-500 placeholder-black border-1 text-black rounded-md  pl-3"
+                    className="form-input h-10 border-gray-500 placeholder-black border-1 text-black rounded-md pl-3"
                   />
                 </div>
               </div>
 
               <div className="space-y-2 flex flex-col">
-                <label htmlFor="subject" className="text-sm text text-left font-bold text-black">
+                <label htmlFor="subject" className="text-sm text-left font-bold text-black">
                   Subject
                 </label>
                 <input id="subject" name="subject" placeholder="Subject" required className="form-input h-10 placeholder-black text-black border-gray-500 border-1 rounded-md pl-3" />
@@ -143,24 +164,11 @@ function Contact() {
                 <label htmlFor="message" className="text-sm font-bold text-black text-left">
                   Message
                 </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  placeholder="Your message"
-                  rows={5}
-                  required
-                  className="form-textarea placeholder-black border-gray-500 border-1 text-black rounded-md pl-3 pt-3"
-                />
+                <textarea id="message" name="message" placeholder="Your message" rows={5} required className="form-textarea placeholder-black border-gray-500 border-1 text-black rounded-md pl-3 pt-3" />
               </div>
 
               <button type="submit" className="flex justify-center items-center gap-3 font-bold text-white bg-black w-full" disabled={isSubmitting}>
-                {isSubmitting ? (
-                  <>Sending...</>
-                ) : (
-                  <>
-                    <FaPaperPlane className="mr-2 h-4 w-4" /> Send Message
-                  </>
-                )}
+                {isSubmitting ? "Sending..." : <><FaPaperPlane className="mr-2 h-4 w-4" /> Send Message</>}
               </button>
             </form>
           </motion.div>
@@ -171,4 +179,3 @@ function Contact() {
 }
 
 export default Contact
-
