@@ -20,11 +20,10 @@ function Contact() {
       message: e.target.message.value,
     };
   
-    const webhookURL = "script.google.com/macros/s/AKfycbw9RPhzumVIbZ9AjCOo-BYEL_-DsCz_yYiAUPt_THatJ2kCUEo4smEJkPG_38GnvaH7/exec?gid=0";
-    const proxyURL = "https://";
+    const webhookURL = "https://portfolio-backend-new.vercel.app/api/submit";
   
     try {
-      const response = await fetch(proxyURL + webhookURL, {
+      const response = await fetch(webhookURL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
