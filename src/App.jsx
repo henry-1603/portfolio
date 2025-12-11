@@ -8,12 +8,15 @@ import "./App.css"
 import Header from "./components/Header"
 import { ThemeProvider } from "./contexts/ThemeContext"
 
+import Background from "./components/Background"
+
 function App() {
   return (
     <ThemeProvider>
-      <div className="App">
-        <main className="min-h-screen">
-          <Header/>
+      <div className="App relative">
+        <Background />
+        <main className="min-h-screen relative z-10">
+          <Header />
           <Hero />
           <TechStack />
           <Experience />
