@@ -6,20 +6,23 @@ import Contact from "./components/Contact"
 import Footer from "./components/Footer"
 import "./App.css"
 import Header from "./components/Header"
+import { ThemeProvider } from "./contexts/ThemeContext"
 
 function App() {
   return (
-    <div className="App">
-      <main className="min-h-screen">
-        <Header/>
-        <Hero />
-        <TechStack />
-        <Experience />
-        <Projects />
-        <Contact />
-        <Footer />
-      </main>
-    </div>
+    <ThemeProvider>
+      <div className="App">
+        <main className="min-h-screen">
+          <Header/>
+          <Hero />
+          <TechStack />
+          <Experience />
+          <Projects />
+          <Contact />
+          <Footer />
+        </main>
+      </div>
+    </ThemeProvider>
   )
 }
 
