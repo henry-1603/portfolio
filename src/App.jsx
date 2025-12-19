@@ -9,11 +9,21 @@ import Header from "./components/Header"
 import { ThemeProvider } from "./contexts/ThemeContext"
 
 import Background from "./components/Background"
+import Snowfall from "react-snowfall"
 
 function App() {
   return (
     <ThemeProvider>
       <div className="App relative">
+        <Snowfall
+          snowflakeCount={200}
+          style={{
+            position: 'fixed',
+            width: '100vw',
+            height: '100vh',
+            zIndex: 1
+          }}
+        />
         <Background />
         <main className="min-h-screen relative z-10">
           <Header />
