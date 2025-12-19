@@ -5,7 +5,6 @@ import Projects from "./components/Projects"
 import Contact from "./components/Contact"
 import Footer from "./components/Footer"
 import "./App.css"
-import Header from "./components/Header"
 import { ThemeProvider } from "./contexts/ThemeContext"
 
 import Background from "./components/Background"
@@ -16,7 +15,7 @@ function App() {
     <ThemeProvider>
       <div className="App relative">
         <Snowfall
-          snowflakeCount={200}
+          snowflakeCount={150}
           style={{
             position: 'fixed',
             width: '100vw',
@@ -26,7 +25,6 @@ function App() {
         />
         <Background />
         <main className="min-h-screen relative z-10">
-          <Header />
           <Hero />
           <TechStack />
           <Experience />

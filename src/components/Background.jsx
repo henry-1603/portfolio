@@ -67,7 +67,7 @@ const Background = () => {
 
                     if (distance < 150) {
                         ctx.beginPath();
-                        ctx.strokeStyle = `rgba(100, 150, 255, ${0.1 * (1 - distance / 150)})`;
+                        ctx.strokeStyle = `rgba(100, 150, 255, ${0.1 * (1 - distance / 50)})`;
                         ctx.lineWidth = 1;
                         ctx.moveTo(p.x, p.y);
                         ctx.lineTo(p2.x, p2.y);
