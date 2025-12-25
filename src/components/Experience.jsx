@@ -1,10 +1,7 @@
-import React, { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import React from "react";
+import { motion } from "framer-motion";
 
 function Experience() {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.1 });
-
   const experiences = [
     {
       present: true,
@@ -56,134 +53,119 @@ function Experience() {
     },
   ];
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.3,
-      },
-    },
-  };
-
-  const cardVariants = {
-    hidden: { y: 50, opacity: 0, scale: 0.9 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      scale: 1,
-      transition: {
-        duration: 0.6,
-        ease: "easeOut",
-      },
-    },
-  };
-
   return (
-    <section id="experience" className="py-16 px-4">
+    <section id="experience" className="py-20 px-4 relative">
       <div className="container mx-auto max-w-4xl">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-center mb-12"
+          className="text-center mb-20"
         >
-          <h2 className="text-3xl md:text-5xl font-bold mb-4 text-[#2f436e] dark:text-blue-400">
+          <h2 className="text-4xl md:text-6xl font-bold mb-6 gradient-text">
             Experience
           </h2>
-          <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+          <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
             My professional journey and the companies I've worked with.
           </p>
         </motion.div>
 
-        <motion.div
-          ref={ref}
-          variants={containerVariants}
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-          className="space-y-8"
-        >
+        <div className="flex flex-col gap-0 pb-20">
           {experiences.map((exp, index) => (
-            <motion.div
+            <div
               key={index}
-              variants={cardVariants}
-              className="relative pl-8 border-l-2 border-slate-200 dark:border-slate-700 pb-12 last:pb-0"
+              className="sticky h-screen flex items-start justify-center"
+              style={{
+                top: index === experiences.length - 1 ? "80px" : `${80 + index * 0}px`,
+                paddingTop: "2rem"
+              }}
             >
-              {/* Timeline Dot */}
-              <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-blue-500 border-4 border-white dark:border-gray-900" />
-
               <motion.div
-                className="relative overflow-hidden rounded-2xl p-8 bg-white/50 dark:bg-gray-800/50 backdrop-blur-md border border-white/20 dark:border-gray-700/50 shadow-sm hover:shadow-xl transition-all duration-300 group"
-                whileHover={{ y: -5, scale: 1.01 }}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                viewport={{ once: true }}
+                className="relative overflow-hidden rounded-3xl p-8 md:p-12 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-2xl group w-full h-[600px] flex flex-col"
+                style={{
+                  zIndex: index + 1,
+                  // scale: 1 - (experiences.length - 1 - index) * 0.02,
+                }}
               >
-                {/* Gradient Glow */}
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                {/* Decoration */}
+                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-bl-full -z-1" />
 
                 {/* Header */}
-                <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6 relative z-10">
+                <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-8 flex-shrink-0">
                   <div>
-                    <div className="flex items-center gap-3 mb-2">
-                      <h3 className="text-2xl font-bold text-gray-800 dark:text-gray-100">
+                    <div className="flex items-center gap-4 mb-3">
+                      <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-gray-100">
                         {exp.title}
                       </h3>
                       {exp.present && (
-                        <span className="px-3 py-1 bg-green-500/20 text-green-600 dark:text-green-400 text-xs font-bold rounded-full border border-green-500/20">
+                        <span className="px-4 py-1.5 bg-green-500/10 text-green-600 dark:text-green-400 text-xs font-bold rounded-full border border-green-500/20">
                           Current
                         </span>
                       )}
                     </div>
-                    <h4 className="text-lg font-semibold text-blue-600 dark:text-blue-400">
+                    <h4 className="text-xl font-bold text-blue-600 dark:text-blue-400 mb-2">
                       {exp.company}
                     </h4>
+                    <div className="flex items-center gap-3 text-sm text-gray-500 dark:text-gray-400">
+                      <span>{exp.location}</span>
+                      <span>•</span>
+                      <span>{exp.period}</span>
+                    </div>
                   </div>
-                  <div className="flex flex-col md:items-end mt-4 md:mt-0 text-sm text-gray-500 dark:text-gray-400">
-                    <span className="font-medium bg-gray-100 dark:bg-gray-700/50 px-3 py-1 rounded-full">{exp.period}</span>
-                    <span className="mt-1">{exp.location} • {exp.duration}</span>
-                  </div>
-                </div>
-
-                {/* Description */}
-                <p className="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed relative z-10">
-                  {exp.description}
-                </p>
-
-                {/* Technologies */}
-                <div className="mb-6 relative z-10">
-                  <div className="flex flex-wrap gap-2">
-                    {exp.technologies.map((tech, techIndex) => (
-                      <span
-                        key={techIndex}
-                        className="px-3 py-1 bg-blue-50/50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 text-xs font-medium rounded-full border border-blue-100 dark:border-blue-900/30"
-                      >
-                        {tech}
-                      </span>
-                    ))}
+                  <div className="mt-4 md:mt-0">
+                    <span className="px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-xl text-sm font-semibold">
+                      {exp.duration}
+                    </span>
                   </div>
                 </div>
 
-                {/* Achievements */}
-                <div className="relative z-10">
-                  <h5 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3 flex items-center gap-2">
-                    Key Achievements
-                  </h5>
-                  <ul className="grid md:grid-cols-2 gap-3">
-                    {exp.achievements.map((achievement, achIndex) => (
-                      <li
-                        key={achIndex}
-                        className="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-400"
-                      >
-                        <span className="w-1.5 h-1.5 bg-blue-500 rounded-full mt-2 flex-shrink-0" />
-                        <span>{achievement}</span>
-                      </li>
-                    ))}
-                  </ul>
+                {/* Description - Scrollable if content too long */}
+                <div className="flex-grow overflow-y-auto pr-2 custom-scrollbar mb-8">
+                  <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-lg">
+                    {exp.description}
+                  </p>
+                </div>
+
+                {/* Achievements & Skills Split */}
+                <div className="grid md:grid-cols-2 gap-8 flex-shrink-0 mt-auto pt-4 border-t border-gray-100 dark:border-gray-700/50">
+                  <div>
+                    <h5 className="text-sm font-bold uppercase tracking-wider text-gray-400 mb-4">
+                      Technologies Used
+                    </h5>
+                    <div className="flex flex-wrap gap-2">
+                      {exp.technologies.map((tech, techIndex) => (
+                        <span
+                          key={techIndex}
+                          className="px-3 py-1 bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-xs font-medium rounded-lg border border-blue-100 dark:border-blue-900/50"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                  <div>
+                    <h5 className="text-sm font-bold uppercase tracking-wider text-gray-400 mb-4">
+                      Key Achievements
+                    </h5>
+                    <ul className="space-y-2">
+                      {exp.achievements.slice(0, 3).map((achievement, achIndex) => (
+                        <li key={achIndex} className="flex items-start gap-3 text-sm text-gray-600 dark:text-gray-400">
+                          <div className="w-1.5 h-1.5 bg-blue-500 rounded-full mt-2 flex-shrink-0" />
+                          <span className="line-clamp-2">{achievement}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
               </motion.div>
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

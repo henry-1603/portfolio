@@ -9,6 +9,7 @@ import { ThemeProvider } from "./contexts/ThemeContext"
 
 import Background from "./components/Background"
 import Snowfall from "react-snowfall"
+import Header from "./components/Header"
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         />
         <Background />
         <main className="min-h-screen relative z-10">
+          <Header/>
           <Hero />
           <TechStack />
           <Experience />

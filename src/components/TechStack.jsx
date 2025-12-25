@@ -1,5 +1,5 @@
-import React, { useRef, useState } from "react";
-import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 // icons
 import next from '../assets/tech/nextjs.svg'
@@ -26,9 +26,13 @@ import dynamoDb from '../assets/tech/dynamodb.svg'
 import go from '../assets/tech/go.png'
 
 function TechStack() {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.1 });
-  const [hoveredTech, setHoveredTech] = useState(null);
+  const targetRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: targetRef,
+  });
+
+  const x1 = useTransform(scrollYProgress, [0, 1], ["0%", "-50%"]);
+  const x2 = useTransform(scrollYProgress, [0, 1], ["-50%", "0%"]);
 
   const technologies = [
     { name: "Next.js", icon: next, level: 90, category: "Frontend" },
@@ -55,172 +59,75 @@ function TechStack() {
     { name: "Postman", icon: postman, level: 90, category: "API Testing" },
   ];
 
-  const categories = [...new Set(technologies.map(tech => tech.category))];
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.05,
-        delayChildren: 0.2,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { y: 50, opacity: 0, scale: 0.8 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      scale: 1,
-      transition: {
-        duration: 0.6,
-        ease: "easeOut",
-      },
-    },
-  };
-
+  const firstRow = [...technologies, ...technologies];
+  const secondRow = [...technologies, ...technologies].reverse();
 
   return (
-    <section id="techstack" className="py-20 relative overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-blue-500/10 to-purple-600/10 rounded-full blur-3xl" />
-      </div>
-
-      <div className="container mx-auto px-4 max-w-full overflow-hidden">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl md:text-6xl font-bold mb-6 gradient-text">
-            Tech Stack
-          </h2>
-          <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto leading-relaxed">
-            Technologies and tools I work with to bring ideas to life.
-          </p>
-        </motion.div>
-
-        <div className="flex flex-col gap-12">
-          {/* Row 1 - Scroll Left */}
-          <div className="relative flex overflow-hidden group">
-            <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-white dark:from-[#0f172a] to-transparent z-10" />
-            <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-white dark:from-[#0f172a] to-transparent z-10" />
-
-            <motion.div
-              className="flex gap-8 whitespace-nowrap"
-              animate={{ x: [0, -1000] }}
-              transition={{
-                x: {
-                  repeat: Infinity,
-                  repeatType: "loop",
-                  duration: 25,
-                  ease: "linear",
-                },
-              }}
-            >
-              {[...technologies, ...technologies].map((tech, index) => (
-                <div
-                  key={index}
-                  className="inline-flex flex-col items-center justify-center p-6 w-40 h-40 bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm border border-gray-200 dark:border-gray-700 rounded-2xl hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors duration-300"
-                >
-                  <div className="w-16 h-16 mb-4 flex items-center justify-center">
-                    <img src={tech.icon} alt={tech.name} className="w-full h-full object-contain" />
-                  </div>
-                  <span className="font-semibold text-gray-700 dark:text-gray-200">{tech.name}</span>
-                </div>
-              ))}
-            </motion.div>
-
-            <motion.div
-              className="flex gap-8 whitespace-nowrap ml-8"
-              animate={{ x: [0, -1000] }}
-              transition={{
-                x: {
-                  repeat: Infinity,
-                  repeatType: "loop",
-                  duration: 25,
-                  ease: "linear",
-                },
-              }}
-              aria-hidden="true"
-            >
-              {[...technologies, ...technologies].map((tech, index) => (
-                <div
-                  key={`clone-${index}`}
-                  className="inline-flex flex-col items-center justify-center p-6 w-40 h-40 bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm border border-gray-200 dark:border-gray-700 rounded-2xl hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors duration-300"
-                >
-                  <div className="w-16 h-16 mb-4 flex items-center justify-center">
-                    <img src={tech.icon} alt={tech.name} className="w-full h-full object-contain" />
-                  </div>
-                  <span className="font-semibold text-gray-700 dark:text-gray-200">{tech.name}</span>
-                </div>
-              ))}
-            </motion.div>
-          </div>
-
-          {/* Row 2 - Scroll Right (Reverse) */}
-          <div className="relative flex overflow-hidden group">
-            <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-white dark:from-[#0f172a] to-transparent z-10" />
-            <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-white dark:from-[#0f172a] to-transparent z-10" />
-
-            <motion.div
-              className="flex gap-8 whitespace-nowrap"
-              animate={{ x: [-1000, 0] }}
-              transition={{
-                x: {
-                  repeat: Infinity,
-                  repeatType: "loop",
-                  duration: 30, // Slightly slower
-                  ease: "linear",
-                },
-              }}
-            >
-              {[...technologies.reverse(), ...technologies].map((tech, index) => (
-                <div
-                  key={`row2-${index}`}
-                  className="inline-flex flex-col items-center justify-center p-6 w-40 h-40 bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm border border-gray-200 dark:border-gray-700 rounded-2xl hover:bg-purple-50 dark:hover:bg-purple-900/20 transition-colors duration-300"
-                >
-                  <div className="w-16 h-16 mb-4 flex items-center justify-center">
-                    <img src={tech.icon} alt={tech.name} className="w-full h-full object-contain" />
-                  </div>
-                  <span className="font-semibold text-gray-700 dark:text-gray-200">{tech.name}</span>
-                </div>
-              ))}
-            </motion.div>
-
-            <motion.div
-              className="flex gap-8 whitespace-nowrap ml-8"
-              animate={{ x: [-1000, 0] }}
-              transition={{
-                x: {
-                  repeat: Infinity,
-                  repeatType: "loop",
-                  duration: 30,
-                  ease: "linear",
-                },
-              }}
-              aria-hidden="true"
-            >
-              {[...technologies, ...technologies].map((tech, index) => (
-                <div
-                  key={`row2-clone-${index}`}
-                  className="inline-flex flex-col items-center justify-center p-6 w-40 h-40 bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm border border-gray-200 dark:border-gray-700 rounded-2xl hover:bg-purple-50 dark:hover:bg-purple-900/20 transition-colors duration-300"
-                >
-                  <div className="w-16 h-16 mb-4 flex items-center justify-center">
-                    <img src={tech.icon} alt={tech.name} className="w-full h-full object-contain" />
-                  </div>
-                  <span className="font-semibold text-gray-700 dark:text-gray-200">{tech.name}</span>
-                </div>
-              ))}
-            </motion.div>
-          </div>
+    <section ref={targetRef} id="techstack" className="relative h-[200vh]">
+      <div className="sticky top-0 h-screen flex flex-col justify-center overflow-hidden">
+        {/* Background Elements */}
+        <div className="absolute inset-0 -z-10">
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-blue-500/10 to-purple-600/10 rounded-full blur-3xl" />
         </div>
 
+        <div className="container mx-auto px-4 max-w-full">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl md:text-6xl font-bold mb-6 gradient-text">
+              Tech Stack
+            </h2>
+            <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto leading-relaxed">
+              Technologies and tools I work with to bring ideas to life.
+            </p>
+          </motion.div>
+
+          <div className="flex flex-col gap-12">
+            {/* Row 1 */}
+            <div className="relative flex overflow-hidden group">
+              <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-white dark:from-[#0f172a] to-transparent z-10" />
+              <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-white dark:from-[#0f172a] to-transparent z-10" />
+
+              <motion.div style={{ x: x1 }} className="flex gap-8 whitespace-nowrap">
+                {firstRow.map((tech, index) => (
+                  <div
+                    key={index}
+                    className="inline-flex flex-col items-center justify-center p-6 w-40 h-40 bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm border border-gray-200 dark:border-gray-700 rounded-2xl hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors duration-300"
+                  >
+                    <div className="w-16 h-16 mb-4 flex items-center justify-center">
+                      <img src={tech.icon} alt={tech.name} className="w-full h-full object-contain" />
+                    </div>
+                    <span className="font-semibold text-gray-700 dark:text-gray-200">{tech.name}</span>
+                  </div>
+                ))}
+              </motion.div>
+            </div>
+
+            {/* Row 2 */}
+            <div className="relative flex overflow-hidden group">
+              <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-white dark:from-[#0f172a] to-transparent z-10" />
+              <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-white dark:from-[#0f172a] to-transparent z-10" />
+
+              <motion.div style={{ x: x2 }} className="flex gap-8 whitespace-nowrap">
+                {secondRow.map((tech, index) => (
+                  <div
+                    key={index}
+                    className="inline-flex flex-col items-center justify-center p-6 w-40 h-40 bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm border border-gray-200 dark:border-gray-700 rounded-2xl hover:bg-purple-50 dark:hover:bg-purple-900/20 transition-colors duration-300"
+                  >
+                    <div className="w-16 h-16 mb-4 flex items-center justify-center">
+                      <img src={tech.icon} alt={tech.name} className="w-full h-full object-contain" />
+                    </div>
+                    <span className="font-semibold text-gray-700 dark:text-gray-200">{tech.name}</span>
+                  </div>
+                ))}
+              </motion.div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );

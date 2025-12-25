@@ -56,7 +56,7 @@ function Header() {
   };
 
   return (
-    <div className={`fixed top-4 left-1/2 transform -translate-x-1/2 z-50 p-4 transition-all duration-300 w-[95%] md:w-[80%] lg:w-[70%] rounded-full ${scrolled
+    <div className={`fixed top-4 left-1/2 transform -translate-x-1/2 z-50 p-4 transition-all duration-300 w-[95%] md:w-[80%] lg:w-[70%] rounded-full hidden lg:flex ${scrolled
       ? 'bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl border border-white/20 dark:border-gray-700 shadow-[0_8px_32px_0_rgba(31,38,135,0.37)]'
       : 'bg-white/10 dark:bg-black/10 backdrop-blur-md border border-white/10 dark:border-white/5'
       } z-[100]`}>

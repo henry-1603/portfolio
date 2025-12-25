@@ -3,8 +3,8 @@ import { motion, useInView } from "framer-motion";
 import { FaGithub, FaLink, FaEye, FaCode, FaRocket, FaStar } from "react-icons/fa";
 
 import aiInterview from '../assets/projects/ai-interview.png'
-import eventManagement from '../assets/projects/eventManagement.png'
-import budget from '../assets/projects/budgetBuddy.png'
+import bhaktiProject from '../assets/projects/bhakti-project.png'
+import qLearning from '../assets/projects/q-learning.png'
 
 function Projects() {
   const ref = useRef(null);
@@ -12,6 +12,58 @@ function Projects() {
   const [hoveredProject, setHoveredProject] = useState(null);
 
   const projects = [
+    {
+      title: "Bhakti Infrastructure Website",
+      description: "A freelance infrastructure website built from scratch with Next.js, Tailwind CSS, and Material-UI. Delivering a premium digital identity for Bhakti Infrastructure.",
+      longDescription: "A fully custom-built freelance project for Bhakti Infrastructure. I developed this website from the ground up, focusing on a clean, professional aesthetic and a seamless user experience for showcasing infrastructure projects and services.",
+      image: bhaktiProject,
+      tags: ["Next.js", "Tailwind CSS", "Material-UI", "TypeScript"],
+      // github: "",
+      demo: "https://www.bhaktiinfrastructure.com/",
+      featured: true,
+      status: "Live",
+      category: "Web App",
+      techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Material-UI"],
+      features: [
+        "Freelance project built from scratch",
+        "Modern professional design",
+        "Responsive infrastructure showcase",
+        "Smooth navigation and animations",
+        "Contact and lead generation tools"
+      ],
+      challenges: [
+        "Implementing a cohesive design system",
+        "Optimizing for SEO and performance",
+        "Creating custom Material-UI themes",
+        "Handling complex layout requirements"
+      ]
+    },
+    {
+      title: "Q-Learning Warehouse Robot",
+      description: "An autonomous Warehouse Robot simulation using Reinforcement Learning to navigate and learn via trial and error. 🤖✨",
+      longDescription: "I built a full-stack simulation of an Autonomous Warehouse Robot in a chaotic 10x10 maze. Using Q-Learning, the agent learns to avoid obstacles and find packages through trial and error, moving from random collisions to finding the shortest path every time.",
+      image: qLearning,
+      tags: ["Python", "FastAPI", "React", "NumPy", "TailwindCSS"],
+      github: "https://github.com/henry-1603/warehouse-robot-rl",
+      demo: "",
+      featured: true,
+      status: "Live",
+      category: "AI/ML",
+      techStack: ["Python (FastAPI)", "NumPy", "React", "TailwindCSS"],
+      features: [
+        "10x10 Maze environment simulation",
+        "Real-time math processing with NumPy",
+        "FastAPI backend for learning logic",
+        "Live React-based visualization",
+        "Autonomous path optimization"
+      ],
+      challenges: [
+        "Balancing exploration vs exploitation",
+        "Visualizing the math in real-time",
+        "Optimizing the state-space for performance",
+        "Implementing dynamic obstacle handling"
+      ]
+    },
     {
       title: "AI Interview Mocker",
       description: "Built an AI-powered Interview Platform with Next.js & Gemini AI! Excited to share my latest project—a smart AI-driven interview system! 🎤💻",
@@ -36,58 +88,6 @@ function Projects() {
         "Implementing real-time audio processing",
         "Creating intuitive user experience",
         "Managing database performance"
-      ]
-    },
-    {
-      title: "Event Management Platform",
-      description: "Event Management Platform, a full-stack web application designed to streamline event creation, management, and tracking!🌟 Create and manage events with ease 🗓️ Real-time updates with WebSocket integration 🔄",
-      longDescription: "A comprehensive event management platform that enables users to create, manage, and track events in real-time. Features include event creation, attendee management, real-time notifications, and interactive dashboards.",
-      image: eventManagement,
-      tags: ["React", "Tailwind CSS", "Node.js", "Express.js", "WebSockets"],
-      github: "https://github.com/henry-1603/Event-Management-Platform",
-      demo: "https://event-management-platform-tmvf.vercel.app/",
-      featured: true,
-      status: "Live",
-      category: "Web App",
-      techStack: ["React", "Node.js", "Express.js", "Socket.io", "MongoDB", "Tailwind CSS"],
-      features: [
-        "Real-time event updates",
-        "Interactive event dashboard",
-        "Attendee management system",
-        "WebSocket integration",
-        "Responsive design"
-      ],
-      challenges: [
-        "Implementing real-time WebSocket connections",
-        "Managing complex state in React",
-        "Creating scalable backend architecture",
-        "Optimizing real-time performance"
-      ]
-    },
-    {
-      title: "Budget Buddy",
-      description: "Created a user-friendly application to empower individuals in taking control of their financial activities. The finance tracker offers comprehensive tools for personal finance management, including: User Management, Account Management, Budgeting Tools, Expense Tracking, Income Tracking, Recurring Transactions",
-      longDescription: "A comprehensive personal finance management application built with React and Go. The platform provides users with complete control over their financial activities through intuitive budgeting tools, expense tracking, and financial analytics.",
-      image: budget,
-      tags: ["React.js", "Tailwind CSS", "Go"],
-      github: "https://github.com/henry-1603/personal-finance-tracker-go",
-      demo: "",
-      featured: false,
-      status: "Development",
-      category: "Finance",
-      techStack: ["React", "Go", "Gin Framework", "PostgreSQL", "Tailwind CSS"],
-      features: [
-        "Personal finance tracking",
-        "Budget management tools",
-        "Expense categorization",
-        "Financial analytics",
-        "Recurring transaction management"
-      ],
-      challenges: [
-        "Building robust financial calculations",
-        "Implementing secure data handling",
-        "Creating intuitive financial dashboards",
-        "Optimizing Go backend performance"
       ]
     },
   ];
@@ -155,7 +155,7 @@ function Projects() {
             Featured Projects
           </h2>
           <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto leading-relaxed">
-            A showcase of my recent work, demonstrating my skills in full-stack development, 
+            A showcase of my recent work, demonstrating my skills in full-stack development,
             AI integration, and modern web technologies.
           </p>
         </motion.div>
@@ -171,9 +171,8 @@ function Projects() {
             <motion.div
               key={index}
               variants={projectVariants}
-              className={`flex flex-col ${
-                index % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"
-              } gap-12 items-center`}
+              className={`flex flex-col ${index % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"
+                } gap-12 items-center`}
               onHoverStart={() => setHoveredProject(index)}
               onHoverEnd={() => setHoveredProject(null)}
             >
@@ -181,25 +180,26 @@ function Projects() {
               <div className="lg:w-1/2 relative group">
                 <motion.div
                   className="relative overflow-hidden rounded-2xl shadow-2xl"
-                  whileHover={{ 
+                  whileHover={{
                     scale: 1.02,
                     rotateY: index % 2 === 0 ? 5 : -5,
                   }}
                   transition={{ duration: 0.3 }}
                   style={{ transformStyle: "preserve-3d" }}
                 >
-                <img
-                  src={project.image || "/placeholder.jpg"}
-                  alt={project.title}
-                  className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-                  
+                  <img
+                    src={project.image || "/placeholder.jpg"}
+                    alt={project.title}
+                    className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+
                   {/* Overlay */}
                   <motion.div
                     className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-6"
                     initial={{ opacity: 0 }}
                     whileHover={{ opacity: 1 }}
                   >
+                    {project.github && (
                     <motion.a
                       href={project.github}
                       target="_blank"
@@ -210,6 +210,7 @@ function Projects() {
                     >
                       <FaGithub className="h-6 w-6 text-white" />
                     </motion.a>
+                    )}
                     {project.demo && (
                       <motion.a
                         href={project.demo}
@@ -229,9 +230,8 @@ function Projects() {
               {/* Project Content */}
               <div className="lg:w-1/2">
                 <motion.div
-                  className={`relative bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-200 dark:border-gray-700 ${
-                    hoveredProject === index ? 'ring-2 ring-blue-500 ring-opacity-50' : ''
-                  }`}
+                  className={`relative bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-200 dark:border-gray-700 ${hoveredProject === index ? 'ring-2 ring-blue-500 ring-opacity-50' : ''
+                    }`}
                   whileHover={{ y: -5 }}
                   transition={{ duration: 0.3 }}
                 >
@@ -249,7 +249,7 @@ function Projects() {
                   <h3 className="text-3xl font-bold mb-4 text-gray-800 dark:text-gray-200">
                     {project.title}
                   </h3>
-                  
+
                   <p className="text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">
                     {project.longDescription}
                   </p>
@@ -300,6 +300,7 @@ function Projects() {
 
                   {/* Action Buttons */}
                   <div className="flex flex-col sm:flex-row gap-4">
+                  {project.github && (
                     <motion.a
                       href={project.github}
                       target="_blank"
@@ -311,8 +312,8 @@ function Projects() {
                       <FaGithub className="h-5 w-5" />
                       View Code
                     </motion.a>
-                    
-                    {project.demo ? (
+                  )}
+                  {project.demo ? (
                       <motion.a
                         href={project.demo}
                         target="_blank"
@@ -333,7 +334,7 @@ function Projects() {
                         Coming Soon
                       </motion.button>
                     )}
-                </div>
+                  </div>
                 </motion.div>
               </div>
             </motion.div>
