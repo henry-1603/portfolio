@@ -12,7 +12,7 @@ import {
 import profile from "../assets/henil2.png";
 
 const texts = [
-  "I'm Henil Suhagiya",
+  // "I'm Henil Suhagiya",
   "I build modern web applications",
   "Let's create something amazing!",
 ];
