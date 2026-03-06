@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react";
+// eslint-disable-next-line no-unused-vars
 import { motion, useInView } from "framer-motion";
 import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaPaperPlane, FaCheckCircle, FaTimesCircle, FaLinkedin, FaGithub, FaInstagram } from "react-icons/fa";
 
@@ -140,7 +141,7 @@ function Contact() {
             Get In Touch
           </h2>
           <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto leading-relaxed">
-            Have a project in mind or just want to say hello? I'm always open to discussing 
+            Have a project in mind or just want to say hello? I'm always open to discussing
             new opportunities, creative ideas, or how we can work together.
           </p>
         </motion.div>
@@ -159,8 +160,8 @@ function Contact() {
                 Let's Connect
               </h3>
               <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
-                I'm always excited to hear about new projects and opportunities. 
-                Whether you have a question, want to collaborate, or just want to say hi, 
+                I'm always excited to hear about new projects and opportunities.
+                Whether you have a question, want to collaborate, or just want to say hi,
                 feel free to reach out through any of these channels.
               </p>
             </div>
@@ -359,11 +360,10 @@ function Contact() {
                   <motion.div
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className={`flex items-center gap-3 p-4 rounded-lg ${
-                      submitStatus === "success"
-                        ? "bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300"
-                        : "bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-300"
-                    }`}
+                    className={`flex items-center gap-3 p-4 rounded-lg ${submitStatus === "success"
+                      ? "bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300"
+                      : "bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-300"
+                      }`}
                   >
                     {submitStatus === "success" ? (
                       <FaCheckCircle className="h-5 w-5" />
@@ -395,7 +395,7 @@ function Contact() {
               Ready to Start Your Project?
             </h3>
             <p className="text-gray-600 dark:text-gray-400 mb-6 max-w-2xl mx-auto">
-              I'm always excited to work on new projects and help bring ideas to life. 
+              I'm always excited to work on new projects and help bring ideas to life.
               Let's discuss how we can work together to create something amazing.
             </p>
             <motion.button
