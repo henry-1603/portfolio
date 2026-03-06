@@ -66,12 +66,27 @@ const CustomCursor = () => {
             }
         },
         click: {
-            x: mousePosition.x - 50,
-            y: mousePosition.y - 50,
-            height: 100,
-            width: 100,
+            x: mousePosition.x - 27,
+            y: mousePosition.y - 27,
+            height: 65,
+            width: 65,
             opacity: 1,
             backgroundColor: '#050505',
+            mixBlendMode: 'normal',
+            transition: {
+                type: 'spring',
+                mass: 0.1,
+                stiffness: 800,
+                damping: 30,
+            }
+        },
+        contactClick: {
+            x: mousePosition.x - 27,
+            y: mousePosition.y - 27,
+            height: 65,
+            width: 65,
+            opacity: 1,
+            backgroundColor: '#ffffff',
             mixBlendMode: 'normal',
             transition: {
                 type: 'spring',
@@ -86,11 +101,10 @@ const CustomCursor = () => {
             height: 20,
             width: 20,
             opacity: 0,
+            display: 'none',
             transition: {
-                type: 'spring',
-                mass: 0.1,
-                stiffness: 800,
-                damping: 30,
+                type: 'tween',
+                duration: 0,
             }
         }
     };
@@ -99,14 +113,14 @@ const CustomCursor = () => {
         <motion.div
             className="fixed top-0 left-0 rounded-full pointer-events-none z-[999] flex items-center justify-center font-bold text-center p-4 overflow-hidden"
             variants={variants}
-            animate={isHovered === 'hidden' ? 'hidden' : isHovered === 'click' ? 'click' : isHovered === 'row' ? 'row' : (isHovered ? 'hover' : 'default')}
+            animate={isHovered === 'hidden' ? 'hidden' : isHovered === 'click' ? 'click' : isHovered === 'contactClick' ? 'contactClick' : isHovered === 'row' ? 'row' : isHovered === 'hover' ? 'hidden' : (isHovered ? 'hover' : 'default')}
         >
             {isHovered && cursorText && (
                 <motion.span
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.2, delay: 0.1 }}
-                    className={`text-sm md:text-base tracking-widest break-words ${isHovered === 'click' ? 'text-white' : 'text-black'}`}
+                    className={`text-[9px] md:text-[10px] tracking-widest break-words ${isHovered === 'contactClick' ? 'text-[#050505]' : 'text-white'}`}
                 >
                     {cursorText}
                 </motion.span>
